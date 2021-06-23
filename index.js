@@ -22,6 +22,7 @@ io.on('connection', socket => {
       long: null
     }
     busses.push(bus)
+    io.emit('busConnection', bus)
   })
 
   socket.on('update', data => {
@@ -44,15 +45,15 @@ io.on('connection', socket => {
   })
 })
 
-setInterval(() => {
-  const busLocations = busses.map(bus => {
-    return {
-      lat: bus.lat,
-      long: bus.long
-    }
-  })
-  io.emit('tick', busLocations)
-  console.log(busLocations)
-}, 5000)
+// setInterval(() => {
+//   const busLocations = busses.map(bus => {
+//     return {
+//       lat: bus.lat,
+//       long: bus.long
+//     }
+//   })
+//   io.emit('tick', busLocations)
+//   console.log(busLocations)
+// }, 5000)
 
 server.listen(3000, () => console.log('server started'))
