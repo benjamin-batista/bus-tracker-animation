@@ -8,7 +8,12 @@ function initMap() {
   })
 }
 
-const socket = io('/')
+
+const socket = io()
+socket.on('busConnection', function(subject){
+  console.log(subject)
+})
+
 let busMarkers = []
 socket.on('tick', busses => {
   busMarkers.forEach(busMarker => {
